@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.pandora_escape.x25_scanner"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@mipmap/x25_2_launcher"
+        android:theme="@style/X25Theme"
+        android:launchMode="singleTask"
+        android:supportsRtl="true">
+
+        <activity android:name="com.pandora_escape.x25_scanner.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.pandora_escape.x25_scanner.QR_Display"
+            android:label="@string/title_activity_qr_display"
+            android:parentActivityName="com.pandora_escape.x25_scanner.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pandora_escape.x25_scanner.MainActivity" />
+        </activity>
+
+    </application>
+
+</manifest>

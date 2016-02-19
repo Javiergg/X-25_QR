@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.pandora_escape.javier.pandora_escape.QR_Display">
+</menu>

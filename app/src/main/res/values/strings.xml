@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name" translatable="false">X 25 Scanner</string>
+    <string name="title_activity_qr_display">Message</string>
+
+    <!-- Preference strings -->
+    <string name="file_pref_admin">preferences_admin</string>
+    <string name="pref_cat_lang">Languages</string>
+    <string name="pref_sysdef_lang">Use system default language</string>
+    <string name="pref_choose_lang">Select application language</string>
+    <string name="pref_choose_lang_title">Choose language</string>
+    <string name="pref_messages_cat">Discovered messages</string>
+    <string name="pref_admin_cat">Admin settings</string>
+    <string name="pref_admin_mode_on">Admin Mode</string>
+    <string name="pref_admin_mode_summ_on">Switch off to go back to user mode</string>
+    <string name="pref_admin_mode_summ_off">Exit setting to return to user mode</string>
+    <string name="pref_admin_mode_timer_title">"Time left in Admin Mode "</string>
+    <string name="pref_admin_mode_timer_summ">"Click to restart counter"</string>
+
+    <!-- Admin mode -->
+    <string name="admin_mode_title_suffix">" - Admin"</string>
+    <string name="admin_mode_toast">Admin Mode activated</string>
+
+
+    <string name="language">en</string>
+
+    <string name="scan_button">Scan</string>
+    <string name="scan_button_hint">Scan code</string>
+
+    <string name="msgs_populate">Populate</string>
+    <string name="msgs_delete">Delete Messages</string>
+    <string name="action_settings">Settings</string>
+    <string name="test_xml" translatable="false">Test XML</string>
+
+    <string name="scan_error_title">Scan error!</string>
+    <string name="scan_error_body">Code invalid or scanned incorrectly.</string>
+    <string name="title_activity_sorting_hat" translatable="false">SortingHat</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="spinner_animation">Spinner animation</string>
+    <string name="splash">Application Logo for splash</string>
+    <string name="spinner">Spinner animation</string>
+
+</resources>

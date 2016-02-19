@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity -->
+    <style name="X25Theme"
+           parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorPrimaryDark">@android:color/black</item>
+        <item name="android:colorPrimary">@android:color/darker_gray</item>
+        <item name="android:actionBarStyle">@style/X25ActionBar</item>
+    </style>
+
+    <style name="X25AdminTheme"
+        parent="X25Theme">
+        <item name="android:colorPrimary">@android:color/holo_blue_dark</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="X25ActionBar"
+        parent="android:Widget.DeviceDefault.Light.ActionBar.Solid">
+    </style>
+
+</resources>

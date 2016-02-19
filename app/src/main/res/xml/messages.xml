@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MessageSets>
+    <set language="en">
+        <message code="One">
+            <title>Battery A: 3xx1x1</title>
+            <body>The battery content leaked.
+The message is partially erased.
+Recovered message: 3xx1x1</body>
+        </message>
+        <message code="Two">
+            <title>Battery B: xx21x2</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: xx21x2</body>
+        </message>
+        <message code="Three">
+            <title>Battery C: 31xx13</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: 31xx13</body>
+        </message>
+        <message code="Four">
+            <title>Backup 1: x1xxxx</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: x1xxxx</body>
+        </message>
+        <message code="Five">
+            <title>Backup 2: 3x2xxx</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: 3x2xxx</body>
+        </message>
+        <message code="Six">
+            <title>Backup 3: xx2x0x</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: xx2x0x</body>
+        </message>
+    </set>
+
+    <set language="zh">
+        <message code="One">
+            <title>电池 A: 3xx1x1</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： 3xx1x1</body>
+        </message>
+        <message code="Two">
+            <title>电池 B: xx21x2</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： xx21x2</body>
+        </message>
+        <message code="Three">
+            <title>电池 C: 31xx13</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： 31xx13</body>
+        </message>
+        <message code="Four">
+            <title>备用 1: x1xxxx</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： x1xxxx</body>
+        </message>
+        <message code="Five">
+            <title>备用 2: 3x2xxx</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： 3x2xxx</body>
+        </message>
+        <message code="Six">
+            <title>备用 3: xx2x0x</title>
+            <body>电池泄露
+部分信息已被删除
+已恢复信息： xx2x0x</body>
+        </message>
+    </set>
+
+    <set language="es">
+        <message code="One">
+            <title>Batería A: 3xx1x1</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: 3xx1x1</body>
+        </message>
+        <message code="Two">
+            <title>Batería B: xx21x2</title>
+            <body>The battery content leaked
+Recovered message: xx21x2</body>
+The message is partially erased.
+        </message>
+        <message code="Three">
+            <title>Batería C: 31xx13</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: 31xx13</body>
+        </message>
+        <message code="Four">
+            <title>Reserva 1: x1xxxx</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: x1xxxx</body>
+        </message>
+        <message code="Five">
+            <title>Reserva 2: 3x2xxx</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: 3x2xxx</body>
+        </message>
+        <message code="Six">
+            <title>Reserva 3: xx2x0x</title>
+            <body>The battery content leaked
+The message is partially erased.
+Recovered message: xx2x0x</body>
+        </message>
+    </set>
+</MessageSets>
+	
