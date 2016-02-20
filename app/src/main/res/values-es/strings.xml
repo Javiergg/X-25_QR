@@ -14,4 +14,5 @@
     <string name="pref_choose_lang_title">Elegir idioma</string>
     <string name="pref_choose_lang">Elegir idioma de la aplicación</string>
     <string name="pref_cat_lang">Idiomas</string>
+    <string name="solve_puzzle">Resolver</string>
 </resources>

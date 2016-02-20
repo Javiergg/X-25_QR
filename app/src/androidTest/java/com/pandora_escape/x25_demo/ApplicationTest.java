@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner;
+package com.pandora_escape.x25_demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

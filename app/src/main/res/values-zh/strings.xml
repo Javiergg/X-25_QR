@@ -9,4 +9,5 @@
 
     <string name="language">zh</string>
     <string name="msgs_populate">填充</string>
+    <string name="solve_puzzle">解决</string>
 </resources>

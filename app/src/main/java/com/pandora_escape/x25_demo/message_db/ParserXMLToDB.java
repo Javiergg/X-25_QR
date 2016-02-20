@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner.message_db;
+package com.pandora_escape.x25_demo.message_db;
 
 import android.content.res.XmlResourceParser;
 import android.util.Xml;

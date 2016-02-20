@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner;
+package com.pandora_escape.x25_demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +12,11 @@ public class QR_Display extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(com.pandora_escape.x25_scanner.R.layout.activity_qr_display);
+		setContentView(com.pandora_escape.x25_demo.R.layout.activity_qr_display);
 
 		// Locate the Title and Body views
-		TextView titleView = (TextView) findViewById(com.pandora_escape.x25_scanner.R.id.titleTextView);
-		TextView bodyView = (TextView) findViewById(com.pandora_escape.x25_scanner.R.id.bodyTextView);
+		TextView titleView = (TextView) findViewById(com.pandora_escape.x25_demo.R.id.titleTextView);
+		TextView bodyView = (TextView) findViewById(com.pandora_escape.x25_demo.R.id.bodyTextView);
 
 		// Update their content to the values from the intent
 		String title = getIntent().getStringExtra(MainActivity.EXTRA_MESSAGE_TITLE);
@@ -30,7 +30,7 @@ public class QR_Display extends AppCompatActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(com.pandora_escape.x25_scanner.R.menu.menu_qr_display, menu);
+		getMenuInflater().inflate(com.pandora_escape.x25_demo.R.menu.menu_qr_display, menu);
 		return true;
 	}
 
@@ -42,7 +42,7 @@ public class QR_Display extends AppCompatActivity {
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		if (id == com.pandora_escape.x25_scanner.R.id.action_settings) {
+		if (id == com.pandora_escape.x25_demo.R.id.action_about) {
 			return true;
 		}
 

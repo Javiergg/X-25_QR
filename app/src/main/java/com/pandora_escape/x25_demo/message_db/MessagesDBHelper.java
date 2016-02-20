@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner.message_db;
+package com.pandora_escape.x25_demo.message_db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.pandora_escape.x25_scanner.R;
+import com.pandora_escape.x25_demo.R;
 
 import org.xmlpull.v1.XmlPullParserException;
 

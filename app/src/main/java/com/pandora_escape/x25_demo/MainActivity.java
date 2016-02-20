@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner;
+package com.pandora_escape.x25_demo;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -17,31 +17,47 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.pandora_escape.x25_scanner.message_db.Message;
-import com.pandora_escape.x25_scanner.message_db.MessagesContract;
-import com.pandora_escape.x25_scanner.message_db.MessagesDBHelper;
+import com.pandora_escape.x25_demo.message_db.Message;
+import com.pandora_escape.x25_demo.message_db.MessagesContract;
+import com.pandora_escape.x25_demo.message_db.MessagesDBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-	public static final String EXTRA_MESSAGE_TITLE = "com.pandora_escape.x25_scanner.MESSAGE_TITLE";
-	public static final String EXTRA_MESSAGE_BODY = "com.pandora_escape.x25_scanner.MESSAGE_BODY";
+	public static final String EXTRA_MESSAGE_TITLE = "com.pandora_escape.x25_demo.MESSAGE_TITLE";
+	public static final String EXTRA_MESSAGE_BODY = "com.pandora_escape.x25_demo.MESSAGE_BODY";
 
 	public static final String QR_SCAN_ADDRESS = "com.google.zxing.client.android.SCAN";
 	public static final int QR_SCAN_REQUEST_CODE = 1;
 
-	private Cursor mCursor;
+	private static final int CONTENT_ANIM_FADE = 1500;
+	private static final int SPLASH_ANIM_STATIC = 2000;
+	private static final int SPLASH_ANIM_FADE = 1000;
+
 	private static SimpleCursorAdapter mMessageCursorAdapter;
-
 	private static MessagesDBHelper sMessagesDBHelper;
+	private Cursor mCursor;
 
-	private LinearLayout mLinearLayout;
+	private LinearLayout mContentLayout;
 	private ListView mMessageListView;
 	private ImageView mSplashImageView;
 	private ImageView mLoadingImageView;
+
 	private AnimationDrawable mSpinnerAnimation;
+
+	private boolean mFirstRun = true;
 
 
 	// Functions
+	private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+		public void onItemClick(AdapterView parent, View v, int position, long id) {
+			mCursor.moveToPosition(position);
+
+			int titleIndex = mCursor.getColumnIndex(MessagesContract.MessagesAll.COLUMN_NAME_TITLE);
+			int bodyIndex = mCursor.getColumnIndex(MessagesContract.MessagesAll.COLUMN_NAME_BODY);
+
+			displayMessage(mCursor.getString(titleIndex), mCursor.getString(bodyIndex));
+		}
+	};
 
 	public void scanQR(View view) {
 		mLoadingImageView.setVisibility(View.VISIBLE);
@@ -61,13 +77,12 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-
 	public void displayMessage(Message message) {
 		Intent MessageIntent = new Intent(this, QR_Display.class);
 
 		if (message == null || message.getTitle() == null) {
-			MessageIntent.putExtra(EXTRA_MESSAGE_TITLE, getString(com.pandora_escape.x25_scanner.R.string.scan_error_title));
-			MessageIntent.putExtra(EXTRA_MESSAGE_BODY, getString(com.pandora_escape.x25_scanner.R.string.scan_error_body));
+			MessageIntent.putExtra(EXTRA_MESSAGE_TITLE, getString(com.pandora_escape.x25_demo.R.string.scan_error_title));
+			MessageIntent.putExtra(EXTRA_MESSAGE_BODY, getString(com.pandora_escape.x25_demo.R.string.scan_error_body));
 		} else {
 			MessageIntent.putExtra(EXTRA_MESSAGE_TITLE, message.getTitle());
 			MessageIntent.putExtra(EXTRA_MESSAGE_BODY, message.getBody());
@@ -75,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
 		startActivity(MessageIntent);
 	}
-
 
 	/**
 	 * Displays a message on screen by sending an intent to the QR_Display activity
@@ -92,18 +106,17 @@ public class MainActivity extends AppCompatActivity {
 		startActivity(MessageIntent);
 	}
 
-
 	// Activity Lifecycle
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(com.pandora_escape.x25_scanner.R.layout.activity_main);
+		setContentView(com.pandora_escape.x25_demo.R.layout.activity_main);
 
 		sMessagesDBHelper = MessagesDBHelper.getInstance(this);
 
 		// Build ListView
-		mMessageListView = (ListView) findViewById(com.pandora_escape.x25_scanner.R.id.clueListView);
+		mMessageListView = (ListView) findViewById(com.pandora_escape.x25_demo.R.id.clueListView);
 		mCursor = sMessagesDBHelper.getDiscoveredMessages();
 		mMessageCursorAdapter = new SimpleCursorAdapter(this,
 				android.R.layout.simple_list_item_1,
@@ -115,16 +128,15 @@ public class MainActivity extends AppCompatActivity {
 
 		mMessageListView.setOnItemClickListener(mMessageClickedHandler);
 
-		mLinearLayout = (LinearLayout) findViewById(R.id.content_layout);
-		mSplashImageView = (ImageView) findViewById(R.id.splash_image_view);
-		mLoadingImageView = (ImageView) findViewById(R.id.spinner_image_view);
+		mContentLayout = (LinearLayout) findViewById(com.pandora_escape.x25_demo.R.id.content_layout);
+		mSplashImageView = (ImageView) findViewById(com.pandora_escape.x25_demo.R.id.splash_image_view);
+		mLoadingImageView = (ImageView) findViewById(com.pandora_escape.x25_demo.R.id.spinner_image_view);
 		mSpinnerAnimation = (AnimationDrawable) mLoadingImageView.getDrawable();
 
+		mContentLayout.setVisibility(View.GONE);
 
 		mSplashImageView.setAlpha((float) 1);
-		mSplashImageView.animate().alpha((float) 0.1).setDuration(3000).start();
 	}
-
 
 	/**
 	 * Dispatch onStart() to all fragments.  Ensure any created loaders are
@@ -133,16 +145,33 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
 
 		mLoadingImageView.setVisibility(View.GONE);
 
-		mLinearLayout.setAlpha(0);
-		mLinearLayout.animate().alpha(1).setDuration(1500).start();
+		Runnable contentFaceIn = new Runnable() {
+			@Override
+			public void run() {
+				mContentLayout.setAlpha(0);
+				mContentLayout.setVisibility(View.VISIBLE);
+				mContentLayout.animate().alpha(1).setDuration(CONTENT_ANIM_FADE).start();
+			}
+		};
+
+		if (mFirstRun) {
+			mContentLayout.setVisibility(View.GONE);
+			mContentLayout.setAlpha(0);
+
+			mSplashImageView.animate().scaleX(1).scaleY(1).setDuration(2000).start();
+
+			mSplashImageView.animate().setStartDelay(SPLASH_ANIM_STATIC).alpha((float) 0.1)
+					.setDuration(SPLASH_ANIM_FADE).withStartAction(contentFaceIn).start();
+		} else {
+			contentFaceIn.run();
+		}
+
+
+
+		mFirstRun = false;
 	}
 
 	@Override
@@ -153,14 +182,12 @@ public class MainActivity extends AppCompatActivity {
 		sMessagesDBHelper.close();
 	}
 
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(com.pandora_escape.x25_scanner.R.menu.menu_main, menu);
+		getMenuInflater().inflate(com.pandora_escape.x25_demo.R.menu.menu_main, menu);
 		return true;
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -172,7 +199,13 @@ public class MainActivity extends AppCompatActivity {
 		Cursor cursor;
 
 		switch (id) {
-			case com.pandora_escape.x25_scanner.R.id.populate:
+			case R.id.solve:
+				Intent intentSolve = new Intent(this,QR_Display.class);
+				intentSolve.putExtra(EXTRA_MESSAGE_TITLE, "Solution to the puzzle");
+				intentSolve.putExtra(EXTRA_MESSAGE_BODY, "Password A: 312101\nPassword B: 312102\nPassword C: 312103");
+				startActivity(intentSolve);
+				break;
+			case R.id.populate:
 				// Database
 				sMessagesDBHelper.addAllMessages();
 
@@ -181,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 				mMessageCursorAdapter.notifyDataSetChanged();
 				mCursor = cursor;
 				break;
-			case com.pandora_escape.x25_scanner.R.id.delete_msgs:
+			case R.id.delete_msgs:
 				// Database
 				sMessagesDBHelper.removeAllMessages();
 
@@ -190,15 +223,15 @@ public class MainActivity extends AppCompatActivity {
 				mMessageCursorAdapter.notifyDataSetChanged();
 				mCursor = cursor;
 				break;
-			case com.pandora_escape.x25_scanner.R.id.action_settings:
+			case R.id.action_about:
 				//Intent intent = new Intent(this,SettingsActivity.class);
-				//startActivity(intent);
+				Intent intentAbout = new Intent(this,AboutActivity.class);
+				startActivity(intentAbout);
 				break;
 		}
 
-		return id == com.pandora_escape.x25_scanner.R.id.action_settings || super.onOptionsItemSelected(item);
+		return id == com.pandora_escape.x25_demo.R.id.action_about || super.onOptionsItemSelected(item);
 	}
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -224,16 +257,4 @@ public class MainActivity extends AppCompatActivity {
             }*/
 		}
 	}
-
-
-	private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
-		public void onItemClick(AdapterView parent, View v, int position, long id) {
-			mCursor.moveToPosition(position);
-
-			int titleIndex = mCursor.getColumnIndex(MessagesContract.MessagesAll.COLUMN_NAME_TITLE);
-			int bodyIndex = mCursor.getColumnIndex(MessagesContract.MessagesAll.COLUMN_NAME_BODY);
-
-			displayMessage(mCursor.getString(titleIndex), mCursor.getString(bodyIndex));
-		}
-	};
 }

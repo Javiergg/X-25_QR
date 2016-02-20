@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">X 25 Scanner</string>
+    <string name="app_name" translatable="false">X 25 Demo</string>
     <string name="title_activity_qr_display">Message</string>
 
     <!-- Preference strings -->
@@ -26,17 +26,24 @@
     <string name="scan_button">Scan</string>
     <string name="scan_button_hint">Scan code</string>
 
-    <string name="msgs_populate">Populate</string>
+    <string name="solve_puzzle">Solve</string>
+    <string name="msgs_populate">Show All Messages</string>
     <string name="msgs_delete">Delete Messages</string>
-    <string name="action_settings">Settings</string>
-    <string name="test_xml" translatable="false">Test XML</string>
+    <string name="action_about">About</string>
 
     <string name="scan_error_title">Scan error!</string>
     <string name="scan_error_body">Code invalid or scanned incorrectly.</string>
     <string name="title_activity_sorting_hat" translatable="false">SortingHat</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="spinner_animation">Spinner animation</string>
-    <string name="splash">Application Logo for splash</string>
-    <string name="spinner">Spinner animation</string>
+    <string name="spinner_animation" translatable="false">Spinner animation</string>
+    <string name="splash" translatable="false">Application Logo for splash</string>
+    <string name="spinner" translatable="false">Spinner animation</string>
+
+
+    <string name="about_text1">X 25 Demo</string>
+    <string name="about_text2">Application developed by:</string>
+    <string name="about_text3">Pandora Escape</string>
+    <string name="about_text4">Javier Garcia</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 </resources>

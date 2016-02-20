@@ -1,4 +1,4 @@
-package com.pandora_escape.x25_scanner.message_db;
+package com.pandora_escape.x25_demo.message_db;
 
 import android.provider.BaseColumns;
 
